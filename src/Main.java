@@ -10,29 +10,36 @@ public class Main {
 
         System.out.println("Debut...");
 
-        String directoryPath = "C:\\Users\\Antoine\\Desktop\\RFID\\";
+        String directoryPath = "C:\\Users\\Antoine\\Desktop\\MASTER INDUS\\cours\\RFID\\csv\\";
         ArrayList<String> csvFiles = Directory.listFiles(directoryPath);
 
-        RFIDComponent rfid = new RFIDComponent();
-
         int i = 1;
+
+        ArrayList<Tag> tag = new ArrayList<>();
 
         for(String s : csvFiles){
             System.out.println("Nouveau fichier...");
 
             CSVReader csvReader = new CSVReader();
-            ArrayList<CSVContent> arrayList = csvReader.getContent(directoryPath + s);
-            rfid.set(Integer.toString(i), arrayList);
+            csvReader.getContent(directoryPath + s, "" + i, tag);
 
             ++i;
         }
 
 
-        ArrayList<Antenna> antennas = rfid.getAntennas();
 
-        for(Antenna a : antennas){
-            a.computeFinalMean();
-            a.compareAndSort();
+        for(Tag t : tag){
+
+            t.deleteDoublons();
+            if(t.Li.size() == 1){
+                t.zonePlacement = t.Li.get(0).nom;
+                t.classification = "Ok";
+            }
+            else {
+                t.zonePlacement = "Inconnue";
+                t.classification = "KO";
+            }
+
         }
 
 

@@ -15,9 +15,7 @@ public class CSVReader {
         }
 
 
-        public ArrayList<CSVContent> getContent(String chemin) {
-
-            ArrayList<CSVContent> list = new ArrayList<>();
+        public void getContent(String chemin, String nomAntenne, ArrayList<Tag> listTag) {
 
             if(chemin != null) {
 
@@ -33,37 +31,33 @@ public class CSVReader {
 
                         String[] data = line.split(cvsSplitBy);
 
+                        Tag c = null;
                         if(data[0] != "") {
-
-                            for (int i = 0; i < data.length; i++)
-                                System.out.print(data[i] + ";");
-                            System.out.println();
-
-                            CSVContent c = new CSVContent();
+                            c = new Tag();
                             c.fill(data);
+                        }
 
-                            String tag = c.getTag();
-                            boolean b = false;
-                            int index = 0;
-
-                            for (int i = 0; i < list.size(); i++){
-                                if(tag.matches(list.get(i).getTag())){
-                                    b = true;
-                                    index = i;
+                        if(c != null){
+                            boolean tagExistant = false;
+                            for(Tag t : listTag) {
+                                if (t.getTag().matches(c.getTag())) {
+                                    tagExistant = true;
+                                    Zone zone = new Zone();
+                                    zone.nom = nomAntenne;
+                                    zone.Rssi = c.getRSSI();
+                                    t.Li.add(zone);
                                     break;
                                 }
                             }
-
-                            if (b) {
-                                list.get(index).addRssi(data[8]);
+                            if(!tagExistant){
+                                Zone zone = new Zone();
+                                zone.nom = nomAntenne;
+                                zone.Rssi = c.getRSSI();
+                                c.Li.add(zone);
+                                listTag.add(c);
                             }
-                            else {
-                                list.add(c);
-                            }
-
                         }
                     }
-
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -71,10 +65,7 @@ public class CSVReader {
                 }
             }
 
-            for(CSVContent c : list)
-                c.mean();
-
-            return list;
+            return;
         }
 
 
