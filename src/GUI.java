@@ -26,8 +26,10 @@ public class GUI {
     private JTable table;
 
     public ArrayList<Tag> tags = new ArrayList<>();
+    public ArrayList<GreedyZone> gzList = new ArrayList<>();
     DefaultTableModel model;
 
+    CplexFrame cplexFrame = null;
 
     public GUI(){
         JButtonResolution.addActionListener(new ActionListener() {
@@ -39,6 +41,7 @@ public class GUI {
                 }
                 preProcessing();
                 affichageCentrale();
+                openCplex();
             }
         });
         folderCSV.addActionListener(new ActionListener() {
@@ -51,6 +54,65 @@ public class GUI {
 
     public JPanel getPanel1() {
         return panel1;
+    }
+
+    public void openCplex(){
+
+        TableModel dtm = table.getModel();
+        int nRow = dtm.getRowCount();
+        String[] tableData = new String[nRow];
+        for (int i = 0 ; i < nRow ; i++)
+                tableData[i] = (String)dtm.getValueAt(i,2);
+
+        int totaldemand = 0;
+        GreedyZone z0 = new GreedyZone();
+        z0.zone = 0;
+        GreedyZone z1 = new GreedyZone();
+        z1.zone = 1;
+        GreedyZone z2 = new GreedyZone();
+        z2.zone = 2;
+        GreedyZone z3 = new GreedyZone();
+        z3.zone = 3;
+        GreedyZone z4 = new GreedyZone();
+        z4.zone = 4;
+        for(int i = 0; i < tableData.length; i++){
+            System.out.println(tableData[i]);
+            String s = tableData[i];
+            if((String)dtm.getValueAt(i,3) == "KO") {
+                for (int j = 0; j < s.length(); j++) {
+                    char c = s.charAt(j);
+                    switch (c) {
+                        case '1':
+                            z1.quantite++;
+                            totaldemand++;
+                            break;
+                        case '2':
+                            z2.quantite++;
+                            totaldemand++;
+                            break;
+                        case '3':
+                            z3.quantite++;
+                            totaldemand++;
+                            break;
+                        case '4':
+                            z4.quantite++;
+                            totaldemand++;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        gzList.add(z0);
+        gzList.add(z1);
+        gzList.add(z2);
+        gzList.add(z3);
+        gzList.add(z4);
+
+        cplexFrame = new CplexFrame(gzList, totaldemand);
+        cplexFrame.setUpZone();
     }
 
     public void chercherFolder(){
