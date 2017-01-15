@@ -53,7 +53,7 @@
           <component id="89926" class="javax.swing.JLabel" binding="JLabelScore">
             <constraints/>
             <properties>
-              <text value="Label"/>
+              <text value=""/>
             </properties>
           </component>
         </children>

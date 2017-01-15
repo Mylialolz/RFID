@@ -102,7 +102,8 @@ public class GUI {
         // TODO: place custom component creation code here
         LogoTagSys = new JLabel();
         LogoTagSys.setIcon(new ImageIcon("./tagsys_logo2.jpg"));
-
+        JLabelScore = new JLabel();
+        JLabelScore.setText("Score : 0");
         model = new DefaultTableModel();
         model.addColumn("Tag");
         model.addColumn("Rssi");
