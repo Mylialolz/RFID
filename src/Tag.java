@@ -17,7 +17,6 @@ public class Tag {
     public String classification = "";
     public String zonePlacement = "";
 
-
     public Tag(){
     }
 
@@ -37,7 +36,6 @@ public class Tag {
         return rssi;
     }
 
-
     public void deleteDoublons(){
 
         Map<String, Zone> map = new LinkedHashMap<>();
@@ -47,9 +45,27 @@ public class Tag {
         Li.clear();
         Li.addAll(map.values());
 
-        System.out.print("Li size:" + Li.size() + "\n");
+        if(Li.size() == 1){
+            zonePlacement = Li.get(0).nom;
+            classification = "OK";
+        }
+        else {
+            String s = "";
+            for(int i = 0; i < Li.size(); i++){
+                if(i == Li.size() - 1)
+                    s += Li.get(i).nom ;
+                else
+                    s += Li.get(i).nom +"," ;
+            }
+            zonePlacement = s;
+            classification = "KO";
+        }
 
         return;
+    }
+
+    public void print(){
+        System.out.println("Tag: " + tag + "; Rssi: " + rssi + "; Zone: " + zonePlacement + "; classification: " + classification);
     }
 
 

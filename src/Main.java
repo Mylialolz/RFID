@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 
 /**
@@ -10,37 +11,19 @@ public class Main {
 
         System.out.println("Debut...");
 
-        String directoryPath = "C:\\Users\\Antoine\\Desktop\\MASTER INDUS\\cours\\RFID\\csv\\";
-        ArrayList<String> csvFiles = Directory.listFiles(directoryPath);
+        GUI gui = new GUI();
 
-        int i = 1;
-
-        ArrayList<Tag> tag = new ArrayList<>();
-
-        for(String s : csvFiles){
-            System.out.println("Nouveau fichier...");
-
-            CSVReader csvReader = new CSVReader();
-            csvReader.getContent(directoryPath + s, "" + i, tag);
-
-            ++i;
-        }
-
-
-
-        for(Tag t : tag){
-
-            t.deleteDoublons();
-            if(t.Li.size() == 1){
-                t.zonePlacement = t.Li.get(0).nom;
-                t.classification = "Ok";
+        JFrame frame = new JFrame("Tagsys project");
+        frame.setContentPane(gui.getPanel1());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
             }
-            else {
-                t.zonePlacement = "Inconnue";
-                t.classification = "KO";
-            }
+        });
+        frame.pack();
+        frame.setVisible(true);
 
-        }
 
 
         System.out.println("Fin.");

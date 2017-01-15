@@ -14,7 +14,6 @@ public class CSVReader {
 
         }
 
-
         public void getContent(String chemin, String nomAntenne, ArrayList<Tag> listTag) {
 
             if(chemin != null) {

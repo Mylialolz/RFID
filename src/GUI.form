@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="619" height="511"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="c25d1" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="b7948" class="javax.swing.JTextField" binding="répertoireFichiersCsvTextField" default-binding="true">
+            <constraints/>
+            <properties>
+              <columns value="30"/>
+              <text value=""/>
+              <toolTipText value="Un fichier csv par antenne"/>
+            </properties>
+          </component>
+          <component id="7d4dc" class="javax.swing.JButton" binding="folderCSV">
+            <constraints/>
+            <properties>
+              <text value="Data"/>
+              <toolTipText value="Rechercher le répertoire des données"/>
+            </properties>
+          </component>
+          <component id="daa30" class="javax.swing.JButton" binding="JButtonResolution">
+            <constraints/>
+            <properties>
+              <text value="Lancer"/>
+              <toolTipText value="Lancer résolution"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="58e13" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="a4ec9" class="javax.swing.JLabel" binding="LogoTagSys" custom-create="true">
+            <constraints/>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
+          <hspacer id="a280c">
+            <constraints/>
+          </hspacer>
+          <component id="89926" class="javax.swing.JLabel" binding="JLabelScore">
+            <constraints/>
+            <properties>
+              <text value="Label"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <scrollpane id="3f58d" binding="scrollPane" custom-create="true">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </scrollpane>
+    </children>
+  </grid>
+</form>
